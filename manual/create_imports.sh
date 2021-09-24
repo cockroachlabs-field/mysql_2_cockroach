@@ -1,4 +1,5 @@
-cockroach sql --certs-dir=/Users/chriscasano/local/1/certs/ -e \
+#cockroach sql --certs-dir=/Users/chriscasano/local/1/certs/ -e \
+cockroach sql --insecure -e \
 "select 'import into ' || \
  table_name || \
  ' ( ' || \
@@ -12,6 +13,7 @@ cockroach sql --certs-dir=/Users/chriscasano/local/1/certs/ -e \
  '''' || \
  ' ) WITH fields_escaped_by=' || '''\''' || \
  ', fields_enclosed_by=' || '''' || chr(34) || '''' || \
+ ', rows_terminated_by=e' || '''\n''' || \
  ', nullif = ' || '''\N''' || ';' \
 from information_schema.columns \
 where table_catalog = 'defaultdb' \
